@@ -22,6 +22,11 @@ find_package(CUDA)
 if (NOT CUDA_FOUND)
   message(STATUS "CUDA not found. Project will not be built.")
 endif(NOT CUDA_FOUND)
+set(
+    CUDA_NVCC_FLAGS
+    ${CUDA_NVCC_FLAGS};
+    -O3 -gencode arch=compute_52,code=sm_52;
+    )
 
 if (WIN32)
   set(EXTRA_CXX_FLAGS "/DVERBOSE /D_CRT_SECURE_NO_WARNINGS ")
