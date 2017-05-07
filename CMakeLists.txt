@@ -25,7 +25,7 @@ endif(NOT CUDA_FOUND)
 set(
     CUDA_NVCC_FLAGS
     ${CUDA_NVCC_FLAGS};
-    -O3 -gencode arch=compute_52,code=sm_52;
+    -O3 -gencode arch=compute_50,code=sm_50;
     )
 
 if (WIN32)
