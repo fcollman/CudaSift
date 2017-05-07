@@ -235,7 +235,7 @@ cdef class PySiftData:
         with nogil:
             error = cudaMemcpy(data.d_data, pts, data_size, 
                                    cudaMemcpyHostToDevice)
-        checkError(error, "during cudaMemcpy")
+        checkError(error, "during " + ("cudaHostRegister" if state == 0 else "cudaMemcpy"))
         return self
 
 def ExtractKeypoints(np.ndarray srcImage,
