@@ -10,9 +10,17 @@ set(CPACK_PACKAGE_VERSION_MINOR "${cudaSift_VERSION_MINOR}")
 set(CPACK_PACKAGE_VERSION_PATCH "${cudaSift_VERSION_PATCH}")
 set(CPACK_GENERATOR "ZIP")
 include(CPack)
-
+include_directories("/usr/local/cuda/include") 
 option(CUDASIFT_WITH_OPENCV "CUDASIFT_WITH_OPENCV" ON)
 option(CUDASIFT_WITH_LIB "CUDASIFT_WITH_LIB" ON)
+# Find default python libraries and interpreter
+find_package(PythonInterp REQUIRED)
+find_package(PythonLibs REQUIRED)
+set(
+    CUDA_NVCC_FLAGS
+    ${CUDA_NVCC_FLAGS};
+    -O3 -gencode arch=compute_35,code=sm_35;
+    )
 
 find_package(OpenCV)
 if (NOT OpenCV)
